@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      RACK_PLANNER_ALLOWED_ORIGINS: "http://localhost:5173,http://127.0.0.1:5173"
+      RACK_PLANNER_CORS_ALLOW_CREDENTIALS: "false"
+      RACK_PLANNER_DEVICES_PATH: "/app/data/devices/default_devices.json"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE: "http://localhost:8000"
+    depends_on:
+      - backend

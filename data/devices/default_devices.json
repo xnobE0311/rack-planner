@@ -1,0 +1,133 @@
+[
+  {
+    "id": "switch-gigabit-8-fanless",
+    "name": "8-Port Gigabit Switch (example)",
+    "category": "network-switch",
+    "u_height": 1,
+    "width_mm": 190,
+    "depth_mm": 120,
+    "height_mm": 44.45,
+    "weight_kg": 0.8,
+    "power_w": 10,
+    "power_w_max": 15,
+    "network_ports": [
+      { "type": "RJ45", "count": 8, "speed_gbps": 1 }
+    ],
+    "power_ports": [
+      { "type": "DC barrel", "count": 1, "location": "rear" }
+    ],
+    "mount": {
+      "face": "front",
+      "hole_span_mm": 236.525,
+      "holes_per_u": 3,
+      "hole_diameter_mm": 6.0,
+      "screw_type": "M6"
+    },
+    "venting": { "front": false, "rear": true, "sides": true, "top": true, "bottom": false },
+    "cable_clearance_mm": 30,
+    "notes": "Example data. Validate against real datasheets before production use."
+  },
+  {
+    "id": "poe-switch-16-1u",
+    "name": "16-Port PoE+ Switch (example)",
+    "category": "network-switch",
+    "u_height": 1,
+    "width_mm": 195,
+    "depth_mm": 250,
+    "height_mm": 44.45,
+    "weight_kg": 2.0,
+    "power_w": 120,
+    "power_w_max": 180,
+    "network_ports": [
+      { "type": "RJ45", "count": 16, "speed_gbps": 1, "poe": true, "poe_standard": "802.3at", "poe_budget_w": 120 },
+      { "type": "SFP+", "count": 2, "speed_gbps": 10 }
+    ],
+    "power_ports": [
+      { "type": "IEC C14", "count": 1, "location": "rear" }
+    ],
+    "mount": {
+      "face": "front",
+      "hole_span_mm": 236.525,
+      "holes_per_u": 3,
+      "hole_diameter_mm": 6.0,
+      "screw_type": "M6"
+    },
+    "venting": { "front": true, "rear": true, "sides": false, "top": false, "bottom": false },
+    "cable_clearance_mm": 60,
+    "notes": "Example front-to-back airflow device."
+  },
+  {
+    "id": "patch-panel-12-1u",
+    "name": "12-Port Cat6 Patch Panel (example)",
+    "category": "patch-panel",
+    "u_height": 1,
+    "width_mm": 190,
+    "depth_mm": 40,
+    "height_mm": 44.45,
+    "weight_kg": 0.5,
+    "power_w": 0,
+    "network_ports": [
+      { "type": "RJ45", "count": 12, "speed_gbps": 10 }
+    ],
+    "mount": {
+      "face": "front",
+      "hole_span_mm": 236.525,
+      "holes_per_u": 3,
+      "hole_diameter_mm": 6.0,
+      "screw_type": "M6"
+    },
+    "venting": { "front": false, "rear": false, "sides": false, "top": false, "bottom": false },
+    "cable_clearance_mm": 20,
+    "notes": "Passive component."
+  },
+  {
+    "id": "mini-ups-200w",
+    "name": "Mini UPS 200W (2U example)",
+    "category": "ups",
+    "u_height": 2,
+    "width_mm": 210,
+    "depth_mm": 280,
+    "height_mm": 88.9,
+    "weight_kg": 4.0,
+    "power_w": 0,
+    "power_ports": [
+      { "type": "IEC C14", "count": 1, "location": "rear" },
+      { "type": "IEC C13", "count": 4, "location": "rear" }
+    ],
+    "mount": {
+      "face": "front",
+      "hole_span_mm": 236.525,
+      "holes_per_u": 3,
+      "hole_diameter_mm": 6.0,
+      "screw_type": "M6"
+    },
+    "venting": { "front": true, "rear": true, "sides": false, "top": false, "bottom": false },
+    "cable_clearance_mm": 80,
+    "notes": "Deep and heavy example device."
+  },
+  {
+    "id": "pdu-1u-6outlet",
+    "name": "1U Mini PDU 6-Outlet (example)",
+    "category": "power-distribution",
+    "u_height": 1,
+    "width_mm": 190,
+    "depth_mm": 60,
+    "height_mm": 44.45,
+    "weight_kg": 0.9,
+    "power_w": 0,
+    "power_ports": [
+      { "type": "IEC C14", "count": 1, "location": "rear" },
+      { "type": "IEC C13", "count": 6, "location": "front" }
+    ],
+    "mount": {
+      "face": "front",
+      "hole_span_mm": 236.525,
+      "holes_per_u": 3,
+      "hole_diameter_mm": 6.0,
+      "screw_type": "M6"
+    },
+    "venting": { "front": false, "rear": false, "sides": false, "top": false, "bottom": false },
+    "cable_clearance_mm": 30,
+    "notes": "Example power distribution unit."
+  }
+]

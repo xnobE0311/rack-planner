@@ -1,17 +1,15 @@
 import React from 'react';
 
-/**
- * Form for configuring rack parameters.
- *
- * Provides numeric inputs for height, width, depth and rear clearance. When the
- * user updates a value, the parent `rackSpec` state is updated via
- * `setRackSpec`. Unit conversions (e.g. between mm/inches) can be added in
- * future iterations.
- */
 function RackDesigner({ rackSpec, setRackSpec }) {
   const update = (field, value) => {
+    if (field === 'height_u') {
+      const n = parseInt(value, 10);
+      setRackSpec({ ...rackSpec, [field]: Number.isNaN(n) ? 1 : n });
+      return;
+    }
     setRackSpec({ ...rackSpec, [field]: parseFloat(value) });
   };
+
   return (
     <div style={{ marginBottom: '1rem' }}>
       <h2>Rack Configuration</h2>
@@ -22,25 +20,18 @@ function RackDesigner({ rackSpec, setRackSpec }) {
             type="number"
             min="1"
             max="20"
+            step="1"
             value={rackSpec.height_u}
             onChange={(e) => update('height_u', e.target.value)}
           />
         </label>
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Width (mm):
-          <input
-            type="number"
-            value={rackSpec.width_mm}
-            onChange={(e) => update('width_mm', e.target.value)}
-          />
+          <input type="number" value={rackSpec.width_mm} onChange={(e) => update('width_mm', e.target.value)} />
         </label>
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Depth (mm):
-          <input
-            type="number"
-            value={rackSpec.depth_mm}
-            onChange={(e) => update('depth_mm', e.target.value)}
-          />
+          <input type="number" value={rackSpec.depth_mm} onChange={(e) => update('depth_mm', e.target.value)} />
         </label>
         <label style={{ display: 'flex', flexDirection: 'column' }}>
           Rear Clearance (mm):
