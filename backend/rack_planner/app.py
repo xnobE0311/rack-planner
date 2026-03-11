@@ -8,6 +8,7 @@ from typing import Dict, List
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from .module_manager import active_devices, active_module, activate_module, list_modules, load_modules
 from .schemas import Device, ValidationRequest, ValidationResponse
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -55,6 +56,7 @@ def resolve_device_library_paths() -> List[Path]:
 
 
 def load_device_library() -> List[Device]:
+    """Load base device definitions and merge any devices from the active module."""
     devices_by_id: Dict[str, Device] = {}
     for path in resolve_device_library_paths():
         try:
@@ -72,14 +74,17 @@ def load_device_library() -> List[Device]:
                 raise HTTPException(status_code=500, detail=f"Invalid device entry in {path}: {exc}")
             devices_by_id[device.id] = device
 
+    for device in active_devices():
+        devices_by_id[device.id] = device
+
     return sorted(devices_by_id.values(), key=lambda d: (d.category or "", d.name))
 
 
 def create_app() -> FastAPI:
     app = FastAPI(
         title="Rack-Planner API",
-        description="Backend API for the 10-inch mini rack planner",
-        version="0.1.0",
+        description="Backend API for the 10-inch mini rack planner with Patchbox-style modules",
+        version="0.2.0",
     )
 
     allowed_origins = _split_csv(
@@ -100,6 +105,8 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
+    load_modules()
+
     @app.get("/health")
     def health() -> dict[str, str]:
         return {"status": "ok"}
@@ -107,6 +114,22 @@ def create_app() -> FastAPI:
     @app.get("/api/v1/devices", response_model=List[Device])
     def list_devices_v1() -> List[Device]:
         return load_device_library()
+
+    @app.get("/api/v1/modules")
+    def list_modules_v1() -> dict:
+        return {
+            "active": active_module(),
+            "modules": list_modules(),
+        }
+
+    @app.post("/api/v1/modules/activate")
+    def activate_module_v1(payload: dict) -> dict:
+        module_id = payload.get("module_id")
+        try:
+            activate_module(module_id)
+        except KeyError:
+            raise HTTPException(status_code=404, detail="Module not found")
+        return {"active": active_module()}
 
     @app.post("/api/v1/validate", response_model=ValidationResponse)
     def validate_v1(payload: ValidationRequest) -> ValidationResponse:

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "switch-24-pro-2p5g",
+    "name": "24-Port 2.5G Switch",
+    "category": "switch",
+    "u_height": 1,
+    "width_mm": 210,
+    "depth_mm": 240,
+    "weight_kg": 2.5,
+    "power_w": 180,
+    "power_w_max": 220,
+    "mount_type": "front",
+    "cable_clearance_mm": 45,
+    "notes": "Example module-provided device for high-density mini-rack builds."
+  }
+]

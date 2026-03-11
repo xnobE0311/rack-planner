@@ -13,7 +13,7 @@ parametric printable parts.
 | Area | Status |
 | --- | --- |
 | Repo automation | In progress |
-| Backend API | `v0.1.0` / `/api/v1` draft |
+| Backend API | `v0.2.0` / `/api/v1` draft |
 | Frontend | Alpha |
 | Validation | Basic fit, overlap, width, depth-clearance |
 | 3D viewer | Planned |
@@ -93,12 +93,45 @@ Current stable draft endpoints:
 
 - `GET /health`
 - `GET /api/v1/devices`
+- `GET /api/v1/modules`
+- `POST /api/v1/modules/activate`
 - `POST /api/v1/validate`
 
 Legacy compatibility endpoints are still present for the early scaffold:
 
 - `GET /devices`
 - `POST /validate`
+
+
+## Patchbox-style module system
+
+Rack-Planner now includes a lightweight module system inspired by Patchbox OS.
+A module lives under `backend/rack_planner/modules/<module-id>/` and can ship:
+
+- `module.json` — module metadata
+- `devices.json` — extra device definitions enabled by the module
+
+Only one module is active at a time. When a module is activated, its devices are
+merged into the base device library returned by `GET /api/v1/devices`.
+
+Example included in this pack:
+
+- `backend/rack_planner/modules/network-expansion/module.json`
+- `backend/rack_planner/modules/network-expansion/devices.json`
+
+Activation example:
+
+```bash
+curl -X POST http://localhost:8000/api/v1/modules/activate \
+  -H "Content-Type: application/json" \
+  -d '{"module_id": "network-expansion"}'
+```
+
+List modules:
+
+```bash
+curl http://localhost:8000/api/v1/modules
+```
 
 ## Development milestones
 
