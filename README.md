@@ -20,7 +20,8 @@ parametric printable parts.
 | Printable part generator | Planned |
 
 This repository is being structured so both **humans and AI agents** can extend
-it with minimal hand-holding.
+it with minimal hand-holding. Deterministic workflows are exposed through the `Makefile`
+and AI-specific contribution rules are documented in `CONTRIBUTING_AI.md`.
 
 ## Quick start
 
@@ -81,7 +82,10 @@ Open:
 - `data/devices/` — device metric libraries
 - `docs/architecture.md` — system design
 - `docs/test_plan.md` — executable testing strategy
-- `docs/tasks/` — atomic task template for AI/human contributors
+- `docs/tasks/` — atomic task template and starter tasks for AI/human contributors
+- `schemas/device.schema.json` — JSON schema for device-library validation
+- `data/inventory/current_lab.yaml` — current lab inventory seed based on uploaded hardware list
+- `Makefile` — deterministic developer and CI commands
 
 ## API
 
@@ -181,6 +185,14 @@ Planned next checks:
 Before committing:
 
 ```bash
+make backend-install
+make frontend-install
+make check
+```
+
+Equivalent manual commands:
+
+```bash
 # backend
 cd backend
 pip install -e ".[dev]"
@@ -195,3 +207,13 @@ npm run build
 ## License
 
 MIT. See `LICENSE`.
+
+## AI sustainability extras
+
+This commit pack also includes:
+
+- `CONTRIBUTING_AI.md` for AI-agent operating rules
+- `schemas/device.schema.json` for stable device-library structure
+- starter task files in `docs/tasks/` so work can continue in atomic increments
+- `data/inventory/current_lab.yaml` generated from the uploaded lab inventory
+

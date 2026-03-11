@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/rack-planner/device.schema.json",
+  "title": "Rack Planner Device Library",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "name", "u_height", "width_mm", "depth_mm", "weight_kg", "power_w"],
+    "properties": {
+      "id": {"type": "string", "minLength": 1},
+      "name": {"type": "string", "minLength": 1},
+      "category": {"type": ["string", "null"]},
+      "u_height": {"type": "integer", "minimum": 1},
+      "width_mm": {"type": "number", "exclusiveMinimum": 0},
+      "depth_mm": {"type": "number", "exclusiveMinimum": 0},
+      "height_mm": {"type": ["number", "null"], "exclusiveMinimum": 0},
+      "weight_kg": {"type": "number", "minimum": 0},
+      "power_w": {"type": "number", "minimum": 0},
+      "power_w_max": {"type": ["number", "null"], "minimum": 0},
+      "cable_clearance_mm": {"type": ["number", "null"], "minimum": 0},
+      "notes": {"type": ["string", "null"]}
+    },
+    "additionalProperties": true
+  }
+}

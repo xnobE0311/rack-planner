@@ -1,22 +1,20 @@
-lab_inventory:
-  - item: "3D printer"
-    purpose: "Print rack parts and accessories"
-    quantity: 1
-  - item: "10 inch server rack"
-    purpose: "Current reference rack / baseline dimensions"
-    quantity: 1
-  - item: "Minisforum MSA2"
-    purpose: "Compute nodes"
-    quantity: 2
-  - item: "UniFi Pro XG 8 PoE"
-    purpose: "Core network switch"
-    quantity: 1
-  - item: "Mac mini M4"
-    purpose: "Agent / service node"
-    quantity: 1
-  - item: "Mac Studio"
-    purpose: "Main workstation / AI or build node"
-    quantity: 1
-  - item: "UniFi UPS Tower"
-    purpose: "Power backup"
-    quantity: 1
+# Based on the user's uploaded lab inventory.
+# Source: Device-I-have.txt
+rack_planner_inventory:
+  source: Device-I-have.txt
+  items:
+    - name: 3D printer for printing part
+      category: fabrication
+    - name: 10 inch server rack
+      category: rack
+    - name: Minisforum MSA2
+      category: mini_server
+      quantity: 2
+    - name: UniFi Pro XG 8 PoE
+      category: network_switch
+    - name: Mac mini M4
+      category: compute
+    - name: Mac Studio
+      category: compute
+    - name: UniFi UPS tower
+      category: power
